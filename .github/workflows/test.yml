@@ -1,12 +1,6 @@
-# This is a basic workflow to help you get started with Actions
+name: Test
 
-name: CI
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push, pull_request]
 
 jobs:
   ci:
@@ -14,7 +8,7 @@ jobs:
       mongodb:
         image: mongo
         ports:
-        - 27017:27017
+          - 27017:27017
     strategy:
       fail-fast: false
       matrix:
@@ -26,10 +20,13 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
-        run: pip install poetry && poetry install
-      - name: Run qa
-        run: make qa
+        run: |
+          pip install poetry
+          poetry install
+          poetry config virtualenvs.create
       - name: Run tests
-        run: make test
         env:
           key:  MOTOR_ORM_TEST_DB_CS=mongodb://mongodb:27017
+        run: |
+          make qa
+          make test
