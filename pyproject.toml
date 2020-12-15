@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "motor_orm"
-version = "0.1.0"
+version = "0.2"
 description = ""
 authors = ["Dmirty Simonov <demalf@gmail.com>"]
 include = ["motor_orm/py.typed"]
