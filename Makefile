@@ -1,3 +1,10 @@
+.PHONY: dev nodev
+dev:
+	docker-compose -f docker-compose-dev.yml up -d
+nodev:
+	docker-compose -f docker-compose-dev.yml rm -fs
+
+
 .PHONY: qa
 qa:
 	poetry run flake8 motor_orm
