@@ -23,7 +23,7 @@ class ModelServiceBase(Generic[T]):
         self.collection = self.client[self.collection_name]
 
 
-class ModelService(ModelServiceBase):
+class ModelService(Generic[T], ModelServiceBase):
     @classmethod
     def _model_to_db(cls, model: T) -> dict:
         return model.dict(by_alias=True)
